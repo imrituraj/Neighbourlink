@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Dialog } from "@/components/ui/dialog";
 import { useDemo } from "@/context/demo-context";
-import { CheckCircle2, ShieldCheck, LogOut, Sparkles, AlertCircle, Database } from "lucide-react";
+import { CheckCircle2, ShieldCheck, LogOut, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
@@ -64,7 +64,7 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
       }
     } catch (err: any) {
       console.error("Google sign-in error:", err);
-      setErrorMsg(err.message || "Failed to initiate Google sign in with Supabase");
+      setErrorMsg(err.message || "Failed to initiate Google sign in");
       setLoading(false);
     }
   };
@@ -167,18 +167,6 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
         ) : (
           /* Sign In Options */
           <div className="space-y-4">
-            {/* Supabase Active Connection Pill */}
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-surface-2 border border-line text-[12.5px]">
-              <div className="flex items-center gap-2 text-ink font-medium">
-                <Database className="size-3.5 text-accent" />
-                <span>Supabase Database &amp; Auth</span>
-              </div>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-ok-soft text-ok border border-ok/30">
-                <span className="size-1.5 rounded-full bg-ok" />
-                Connected
-              </span>
-            </div>
-
             {/* Standard Google OAuth Button */}
             <button
               onClick={handleGoogleSignIn}
@@ -186,7 +174,7 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
               className="w-full h-12 px-4 rounded-xl border border-line bg-surface hover:bg-surface-2 hover:border-ink-subtle text-ink font-medium text-[14px] flex items-center justify-center gap-3 transition-all shadow-sm active:scale-[0.99] disabled:opacity-50"
             >
               <GoogleLogo className="size-5 shrink-0" />
-              <span>{loading ? "Connecting to Supabase Google OAuth..." : "Continue with Google"}</span>
+              <span>{loading ? "Connecting with Google..." : "Continue with Google"}</span>
             </button>
 
             {/* Local development only: sign in as a generic demo resident without Google */}
